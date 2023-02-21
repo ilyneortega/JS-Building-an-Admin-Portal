@@ -1,4 +1,3 @@
-
 // Your Code Here
 async function main() {
     let response = await fetch('http://localhost:3001/listBooks')
@@ -13,25 +12,25 @@ function renderBook(book) {
     let qty = document.createElement('input')
     let saveButton = document.createElement('button')
 
-
     listBooks.innerHTML = `${book.title}`
-    qty.value = ('value', `${book.qty}`)
-    btnSave.textContent = 'Save'
+    qty.value = ('value', `${book.quantity}`)
+    saveButton.textContent = 'Save'
 
-    btnSave.addEventListener('click', () => {
+    saveButton.addEventListener('click', () => {
         fetch('http://localhost:3001/updateBook', {
-            method: 'PATCH',
+            method: "PATCH",
             headers: {
-                'Content-Type': 'application.json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 id: book.id,
                 quantity: qty.value
             })
+
         })
     })
     root.append(listBooks)
-    listBooks.appent(qty, btnSave)
+    listBooks.append(qty, saveButton)
 }
 
 main()
